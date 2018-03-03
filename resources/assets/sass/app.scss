@@ -1,0 +1,10 @@
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+#home-header {
+  background: #333 url('/img/bg-home.jpg') no-repeat 50% 50%;
+  background-size: cover;
+}
