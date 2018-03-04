@@ -3,7 +3,7 @@
 @section('content')
     <section id="home-header" class="py-5 text-light">
         <div class="container py-5">
-            <h1 class="text-center">Pour les ardèchois qui ont des bogues dans les poches</h1>
+            <h1 class="text-center">L'Ardèche, pas la dèche</h1>
             <form action="search" method="get">
                 <div class="row pt-5">
                     <div class="col">
