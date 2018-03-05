@@ -11,8 +11,9 @@ class PlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('plan');
+        $planid = $request->id;
+        return view('plan', compact('planid'));
     }
 }

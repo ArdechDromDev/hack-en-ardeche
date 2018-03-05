@@ -1,51 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 pt-3">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h6>Visite de saucisson-land</h6>
-                                <p>A Mirabel, le 4 mars</p>
-                            </div>
-                            <div class="col-md-2">
-                                0€
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h6>Visite de saucisson-land</h6>
-                                <p>A Mirabel, le 4 mars</p>
-                            </div>
-                            <div class="col-md-2">
-                                0€
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <h6>Visite de saucisson-land</h6>
-                                <p>A Mirabel, le 4 mars</p>
-                            </div>
-                            <div class="col-md-2">
-                                0€
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
+@include('partials.cards')
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <script src='js/mustache.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <div class="container-fluid">
+        <div  class="row">
+            <div id="target" class="col-md-6 p-0">
             </div>
             <div class="col-md-6 p-0">
                 <div id="map" style="width: 100%; height: 1000px"></div>
@@ -82,5 +47,26 @@
             .setLngLat(center)
             .setPopup(popup)
             .addTo(map);
+
+
+
+        $.get( '{{config('es.es_url')}}/plans/plan/_search' , function( data ) {
+            var hits = data.hits.hits;
+            console.log(hits);
+            var template = $('#cards').html();
+            Mustache.parse(template);   // optional, speeds up future uses
+            var rendered ='';
+
+            for (var i=0; i<hits.length;i++) {
+                id = hits[i]._id;
+                commune = hits[i]._source.city;
+                zipcode = hits[i]._source.zipcode
+                title = hits[i]._source.activityName;
+                dateStart = hits[i]._source.dateStart;
+                price = hits[i]._source.price;
+                rendered += Mustache.render(template, {id:id, title: title, zipcode: zipcode, commune: commune, date: dateStart , price:price});
+            }
+            $('#target').html(rendered);
+        });
     </script>
 @endsection

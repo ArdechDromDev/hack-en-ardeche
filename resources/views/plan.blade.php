@@ -1,38 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
 
-    <section>
+    <script id="details" type="template">
         <div class="container py-3">
-            <h1>Titre du plan</h1>
-            <div class="row">
-                <div class="col-md-10">
-                    <i class="fas fa-map-marker-alt"></i> Mirabel
-                    Le xx/xx/201x
-                </div>
-                <div class="col-md-2">0 €</div>
-            </div>
+            <h1>@{{title}}</h1>
+        <div class="row">
+            <div class="col-md-10">
+            <i class="fas fa-map-marker-alt"></i> @{{commune}}
+        Le @{{date}}
         </div>
-    </section>
-    <section>
+        <div class="col-md-2">@{{ price }} €</div>
+        </div>
+        </div>
+        </section>
+        <section>
         <div class="container py-3">
             <div class="row">
-                <div class="col-md-6"><i class="fas fa-bicycle"></i> Vélo</div>
-                <div class="col-md-6"><i class="fas fa-music"></i> Musique</div>
-            </div>
+            <div class="col-md-6"><i class="fas fa-bicycle"></i> Vélo</div>
+        <div class="col-md-6"><i class="fas fa-music"></i> Musique</div>
         </div>
-    </section>
-    <section>
+        </div>
+        </section>
+        <section>
         <div class="container py-3">
             <h3>Description</h3>
-        </div>
-    </section>
-    <section>
-        <div class="container py-3">
+            <div>
+                @{{description}}
+            </div>
+            </section>
+            <section>
+            <div class="container py-3">
             <h3>Parcours</h3>
-        </div>
+                <div>
+                    @{{{step}}}
+                </div>
+
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <script src='/js/mustache.min.js'></script>
+
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <section id="target">
+
     </section>
     <section>
         <div class="container-fluid p-0">
@@ -69,5 +82,30 @@
             .setLngLat(center)
             .setPopup(popup)
             .addTo(map);
+
+        $.get( '{{config('es.es_url')}}/plans/plan/{{$planid}}' , function( data ) {
+            var hits = data._source;
+            console.log(hits)
+            var template = $('#details').html();
+            Mustache.parse(template);   // optional, speeds up future uses
+            var rendered ='';
+
+
+                commune = hits.city;
+                zipcode = hits.zipcode
+                title = hits.activityName;
+                dateStart = hits.dateStart;
+                price = hits.price;
+                step = '';
+                steps = hits.steps;
+                for(s=0;s<steps.length;s++) {
+                    step += steps[s].dateStart + ' : ' + steps[s].type +'<br/>';
+                }
+                //description = hits.
+                rendered += Mustache.render(template, {step:step,title: title, zipcode: zipcode, commune: commune, date: dateStart , price:price});
+                //console.log(data.hits.hits[i]._source.Commune)
+                console.log("toto");
+            $('#target').html(rendered);
+        });
     </script>
 @endsection
