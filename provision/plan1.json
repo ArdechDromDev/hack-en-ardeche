@@ -1,0 +1,67 @@
+{
+  "id": 1,
+  "type": "Culturel",
+  "catégorie": "Exposition",
+  "activityName": "Exposition Peinture l'Ami Pinceau",
+  "placeName": "Espace Rionis",
+  "zipCode": "07120",
+  "city": "Ruoms",
+  "gpsLat": 44.483333,
+  "gpsLon": 4.366667,
+  "dateStart": "2018-05-17T10:00:00",
+  "dateEnd": "2018-05-17T18:00:00",
+  "description": "",
+  "priceFree": true,
+  "price": 0,
+  "steps": [
+    {
+      "dateStart": "2018-05-17T08:00:00",
+      "type": "transport",
+      "transport": "covoiturage"
+    },
+    {
+      "dateStart": "2018-06-15T20:00:00",
+      "type": "activity",
+      "activity": {
+        "Catégories": [
+          "Exposition"
+        ],
+        "Code postal": "07120",
+        "Commune": "Ruoms",
+        "Complément horaire": "De 10h à 12h30 et de 15h30 à 18h30",
+        "Date de début": "2018-05-17T00:00:00",
+        "Date de début FR": "Jeudi 17 mai 2018",
+        "Date de fin": "2018-05-21T00:00:00",
+        "Date de fin FR": "Lundi 21 mai 2018",
+        "Descriptif court": "une quinzaine de peintres locaux exposent.",
+        "Entité d'information": "L' Ami Pinceau",
+        "Gratuit": "Oui",
+        "Id Sitra2": "201545",
+        "Image principale - Url": "http://static.apidae-tourisme.com/filestore/objets-touristiques/images-principales/56/27/138040-fiche.jpg",
+        "Nom": "Exposition Peinture l'Ami Pinceau",
+        "Nom du lieu": "Espace Rionis",
+        "Portée": "Locale",
+        "Période en clair": "De 10h à 12h30 et de 15h30 à 18h30.",
+        "Réservé aux enfants": "Non",
+        "Spécial famille avec enfants": "Non",
+        "Tarifs en clair": "Entrée libre.",
+        "Types de manifestation": "Culturelle",
+        "Téléphone": "04 75 39 72 30",
+        "Téléphone international": "+33 4 75 39 72 30",
+        "myId": "887bd9ab2c1a925c5af572b545bcace3a7910b406ea5d82b650ee3e21c59209c",
+        "codes_postaux": "07120",
+        "latitude": "44.5",
+        "longitude": "4.366667",
+        "location": {
+          "lon": "4.366667",
+          "lat": "44.5"
+        }
+      }
+    },
+    {
+      "dateStart": "2018-05-17T15:00:00",
+      "type": "transport",
+      "transport": "covoiturage"
+    }
+  ]
+}
